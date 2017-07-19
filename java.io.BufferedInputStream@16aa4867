@@ -1,0 +1,6 @@
+#Tue Jun 21 10:52:46 BST 2016
+oracleServerPortNo=1521
+oracleServerName=xe
+oracleUserName=kclc
+oracleUserPassword=kclcadmin
+serverName=192.168.67.110

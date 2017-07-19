@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ethincityReport" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8da33116-8948-47f1-9ade-d5ed0d245799">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="enrolmentDate1" class="java.util.Date" isForPrompting="false"/>
+	<parameter name="enrolmentDate2" class="java.util.Date" isForPrompting="false"/>
+	<parameter name="totalStudentDB" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="userComment" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[SELECT DISTINCT
+     ETHNICITY."ETHN_NAME",
+     ETHNICITY_BG."ETHN_BAK_NAME",
+     COUNT(ETHNICITY_BG."ETHN_BAK_NAME") AS TOTAL
+FROM
+     "BENEFICIARIES" BENEFICIARIES INNER JOIN "ADDITIONAL_INFO" ADDITIONAL_INFO ON BENEFICIARIES."STUDENT_REF_NO" = ADDITIONAL_INFO."STUDENT_REF_NO"
+     INNER JOIN "PERSONAL_INFO" PERSONAL_INFO ON BENEFICIARIES."STUDENT_REF_NO" = PERSONAL_INFO."STUDENT_REF_NO"
+     INNER JOIN "ETHNICITY" ETHNICITY ON PERSONAL_INFO."ETHN_ID" = ETHNICITY."ETHN_ID"
+     INNER JOIN "ETHNICITY_BG" ETHNICITY_BG ON PERSONAL_INFO."ETHN_BAK_ID" = ETHNICITY_BG."ETHN_BAK_ID"
+WHERE
+     TO_CHAR(ADDITIONAL_INFO.DATE_REGISTER,'yy/MM/DD') BETWEEN TO_CHAR($P{enrolmentDate1},'yy/MM/DD')AND TO_CHAR($P{enrolmentDate2},'yy/MM/DD')
+ AND ADDITIONAL_INFO.BENEF_TYPE IN ('BLF_NONAcc','BLF_NONAcc,BLF_VOL','BLF_VOL')
+GROUP BY ETHNICITY."ETHN_NAME",ETHNICITY_BG."ETHN_BAK_NAME"
+ORDER BY ETHNICITY."ETHN_NAME"]]>
+	</queryString>
+	<field name="ETHN_NAME" class="java.lang.String"/>
+	<field name="ETHN_BAK_NAME" class="java.lang.String"/>
+	<field name="TOTAL" class="java.math.BigDecimal"/>
+	<variable name="countEt" class="java.lang.Double" incrementType="Report">
+		<variableExpression><![CDATA[$F{TOTAL}/$P{totalStudentDB}]]></variableExpression>
+	</variable>
+	<group name="ethn">
+		<groupExpression><![CDATA[$F{ETHN_NAME}]]></groupExpression>
+		<groupHeader>
+			<band height="22">
+				<textField>
+					<reportElement x="4" y="2" width="551" height="20" forecolor="#006699" uuid="1237e4cb-fccd-40e7-a06b-0993ec2dcacb"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif" size="11" isBold="true" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ETHN_NAME}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#279EBD" uuid="5afe4fff-7932-4bc7-848f-32a04c6b0d93"/>
+				<staticText>
+					<reportElement x="277" y="66" width="298" height="26" forecolor="#FFFFFF" uuid="f794dace-0744-4a48-8dff-73f1335673ea"/>
+					<textElement textAlignment="Right">
+						<font fontName="DejaVu Serif" size="20" isBold="true" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[ETHNICITY REPORT]]></text>
+				</staticText>
+				<image>
+					<reportElement x="20" y="20" width="254" height="60" uuid="6c442727-2bd8-498e-8cd1-953d5e951129"/>
+					<imageExpression><![CDATA["reports/logo.jpg"]]></imageExpression>
+				</image>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20">
+			<textField>
+				<reportElement x="4" y="0" width="361" height="20" uuid="10a828fb-6fba-4a82-bab2-74c141ad18a3"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="11" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["From "+
+new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{enrolmentDate1})+
+" to "+
+new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{enrolmentDate2})]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="60130997-8ec3-4c3e-a457-2cf6a9221a7e"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="269" y="0" width="190" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="80c691bb-6ce3-4f47-a8c0-23c260803cf9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="11" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Ethnicity Background]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="4" y="0" width="265" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="d8130002-34d6-4f5d-ace5-9cb3ff1d738d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="11" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Ethnicity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="459" y="0" width="96" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="5d166f82-c746-44d8-802a-69881444f479"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="11" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Percentage(%)]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField>
+				<reportElement x="269" y="0" width="190" height="20" forecolor="#006699" uuid="64f904be-fb3b-4a0e-8378-2342f0b9d566"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ETHN_BAK_NAME}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement mode="Transparent" x="459" y="0" width="96" height="20" forecolor="#006699" uuid="1ad6d15a-ea48-400b-8bf7-9354bb0580a9"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="11" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTAL}/$P{totalStudentDB}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="80">
+			<staticText>
+				<reportElement x="20" y="10" width="45" height="20" forecolor="#190D0D" uuid="664c56a7-0dfa-419f-ae33-6b1cae6d8840"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="DejaVu Serif" size="11" isBold="true" isUnderline="true" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Note :-]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="65" y="32" width="408" height="25" uuid="7eb4d9c6-ee43-4289-9c36-62bf28bf747f"/>
+				<textElement>
+					<font fontName="DejaVu Serif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{userComment}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="26" y="70" width="204" height="1" uuid="c535c042-0efb-4145-80c8-36c046b99063"/>
+			</line>
+			<line>
+				<reportElement x="309" y="69" width="189" height="1" uuid="3d3bb6a6-805b-43fd-9263-ce3fc1f57a33"/>
+			</line>
+			<staticText>
+				<reportElement x="234" y="60" width="74" height="20" uuid="51f8a921-5df6-4116-9bba-c3b156b1d6c5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[End of Record]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="71f87d39-fcdd-434a-915e-0083d782dde8"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="8b7a3d41-4fff-4e47-a1bd-c49bb3367e06"/>
+				<textElement>
+					<font fontName="DejaVu Serif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="7ce1e263-32dc-4bbd-be98-19855e85cbf5"/>
+				<textElement>
+					<font fontName="DejaVu Serif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="1" width="555" height="1" uuid="a19183b8-a879-4e8d-b04b-68cf4a37e1f9"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

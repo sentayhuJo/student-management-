@@ -1,0 +1,1103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="personalDetail" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8da33116-8948-47f1-9ade-d5ed0d245799">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="70"/>
+	<parameter name="studentID" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[SELECT BENEFICIARIES.STUDENT_REF_NO,
+  SURNAME,
+  GIVEN_NAME,
+  to_char(to_date(DATE_OF_BIRTH,'DD-Mon-YY')) AS DATE_OF_BIRTH ,
+  SEX,
+  ORIENTATION,
+  RELIGION,
+  INSURANCE_NO,
+
+  ADDRESS_1,
+  ADDRESS_2,
+  CITY,
+  POSTAL_CODE,
+  TEL_NO,
+  EMAIL,
+  TWITTER,
+
+  EMP_STATUS,
+  INCOME_DESC,
+  LIVING_DESC,
+  QUALIFICATION,
+  ELIGIBILITY_COMMENT,
+  EQUALITY,
+  BENEFIT_DESC,
+
+  ETHN_NAME,
+  ETHN_BAK_NAME,
+  DISABILITY,
+  DISABILITY_NATU,
+  OTHER_NEED,
+
+  to_char(to_date(DATE_REGISTER,'DD-Mon-YY')) AS DATE_REGISTER ,
+  BENEF_TYPE,
+  to_char(to_date(VOL_START_DATE,'DD-Mon-YY')) AS VOL_START_DATE ,
+  to_char(to_date(VOL_END_DATE,'DD-Mon-YY')) AS VOL_END_DATE ,
+  WITH_CARER,
+  ABOUT_US,
+  REFER_BY,
+  VOL_PROFESSION,
+  to_char(to_date(DATE_ARRIVEUK,'DD-Mon-YY')) AS DATE_ARRIVEUK
+
+FROM BENEFICIARIES INNER JOIN ADDRESS ON (BENEFICIARIES.STUDENT_REF_NO=ADDRESS.STUDENT_REF_NO)
+INNER JOIN PERSON_BACKGROUND ON (BENEFICIARIES.STUDENT_REF_NO=PERSON_BACKGROUND.STUDENT_REF_NO)
+INNER JOIN PERSONAL_INFO ON (BENEFICIARIES.STUDENT_REF_NO=PERSONAL_INFO.STUDENT_REF_NO)
+INNER JOIN ADDITIONAL_INFO ON (BENEFICIARIES.STUDENT_REF_NO=ADDITIONAL_INFO.STUDENT_REF_NO)
+INNER JOIN SEXUAL_ORIENTATION ON (SEXUAL_ORIENTATION.SEX_ORIENT_ID=BENEFICIARIES.SEX_ORIENT_ID)
+INNER JOIN RELIGION ON (RELIGION.RELIGION_ID=BENEFICIARIES.RELIGION_ID)
+INNER JOIN EMPLOYMENT_STATUS ON(EMPLOYMENT_STATUS.EMP_STATUS_ID=PERSON_BACKGROUND.EMP_STATUS_ID)
+INNER JOIN HOUSE_HOLD_INCOME ON (HOUSE_HOLD_INCOME.INCOME_ID=PERSON_BACKGROUND.INCOME_ID)
+INNER JOIN LIVING_IN ON (LIVING_IN.LIVING_IN_ID=PERSON_BACKGROUND.LIVING_IN_ID)
+INNER JOIN QUALIFICATION ON (QUALIFICATION.QUAL_ID=PERSON_BACKGROUND.QUAL_ID)
+INNER JOIN BENEFITS ON (BENEFITS.BENEFIT_ID=PERSON_BACKGROUND.BENEFIT_ID)
+INNER JOIN ETHNICITY ON (ETHNICITY.ETHN_ID=PERSONAL_INFO.ETHN_ID)
+INNER JOIN ETHNICITY_BG ON (ETHNICITY_BG.ETHN_BAK_ID=PERSONAL_INFO.ETHN_BAK_ID)
+WHERE BENEFICIARIES.STUDENT_REF_NO=$P{studentID}]]>
+	</queryString>
+	<field name="STUDENT_REF_NO" class="java.lang.String"/>
+	<field name="SURNAME" class="java.lang.String"/>
+	<field name="GIVEN_NAME" class="java.lang.String"/>
+	<field name="DATE_OF_BIRTH" class="java.lang.String"/>
+	<field name="SEX" class="java.lang.String"/>
+	<field name="ORIENTATION" class="java.lang.String"/>
+	<field name="RELIGION" class="java.lang.String"/>
+	<field name="INSURANCE_NO" class="java.lang.String"/>
+	<field name="ADDRESS_1" class="java.lang.String"/>
+	<field name="ADDRESS_2" class="java.lang.String"/>
+	<field name="CITY" class="java.lang.String"/>
+	<field name="POSTAL_CODE" class="java.lang.String"/>
+	<field name="TEL_NO" class="java.lang.String"/>
+	<field name="EMAIL" class="java.lang.String"/>
+	<field name="TWITTER" class="java.lang.String"/>
+	<field name="EMP_STATUS" class="java.lang.String"/>
+	<field name="INCOME_DESC" class="java.lang.String"/>
+	<field name="LIVING_DESC" class="java.lang.String"/>
+	<field name="QUALIFICATION" class="java.lang.String"/>
+	<field name="ELIGIBILITY_COMMENT" class="java.lang.String"/>
+	<field name="EQUALITY" class="java.lang.String"/>
+	<field name="BENEFIT_DESC" class="java.lang.String"/>
+	<field name="ETHN_NAME" class="java.lang.String"/>
+	<field name="ETHN_BAK_NAME" class="java.lang.String"/>
+	<field name="DISABILITY" class="java.lang.String"/>
+	<field name="DISABILITY_NATU" class="java.lang.String"/>
+	<field name="OTHER_NEED" class="java.lang.String"/>
+	<field name="DATE_REGISTER" class="java.lang.String"/>
+	<field name="BENEF_TYPE" class="java.lang.String"/>
+	<field name="VOL_START_DATE" class="java.lang.String"/>
+	<field name="VOL_END_DATE" class="java.lang.String"/>
+	<field name="WITH_CARER" class="java.lang.String"/>
+	<field name="ABOUT_US" class="java.lang.String"/>
+	<field name="REFER_BY" class="java.lang.String"/>
+	<field name="VOL_PROFESSION" class="java.lang.String"/>
+	<field name="DATE_ARRIVEUK" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#279EBD" uuid="5afe4fff-7932-4bc7-848f-32a04c6b0d93"/>
+				<staticText>
+					<reportElement x="326" y="59" width="236" height="33" forecolor="#FFFFFF" uuid="f794dace-0744-4a48-8dff-73f1335673ea"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="DejaVu Serif" size="20" isBold="true" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[PERSONAL DETAIL]]></text>
+				</staticText>
+				<image>
+					<reportElement x="47" y="20" width="227" height="62" uuid="645f4e3b-9d89-4a89-88e8-28af62c2f517"/>
+					<imageExpression><![CDATA["reports/logo.jpg"]]></imageExpression>
+				</image>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<detail>
+		<band height="485">
+			<staticText>
+				<reportElement x="24" y="29" width="129" height="20" uuid="d6796b0d-33f1-479b-80e4-2db999f91f33"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Student Reference No.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="49" width="129" height="20" uuid="53fecb57-aaa9-4ad3-93ef-13e9d1d9910f"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Surname:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="69" width="129" height="20" uuid="397170fb-9a95-4a79-a3d7-e4eff483badb"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Given Name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="89" width="129" height="20" uuid="b2f7483b-aab6-4fb9-97b4-935a9645700b"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Date of Birth:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="109" width="129" height="20" uuid="ee95fdfc-b25e-4141-9601-822826ffcf02"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Sex:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="129" width="129" height="20" uuid="1223a446-44c6-4db4-ac66-ac2ed80c80be"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[NINO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="207" width="299" height="20" uuid="5b37a1a6-a268-49e9-b7e4-28301f49de39"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="DejaVu Serif" size="11" isBold="true" isItalic="false" isUnderline="true" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ Personal Background]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="315" width="423" height="20" uuid="b7f1be6c-3045-4b93-9e8b-4c86997218f1"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="DejaVu Serif" size="11" isBold="true" isItalic="false" isUnderline="true" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ Personal Information]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="227" width="142" height="20" uuid="2a0e47df-3bea-4aa2-a1ac-23f9fc058ccd"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Employement Status:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="247" width="142" height="20" uuid="58ea8da5-ddec-49ab-98e3-e661a326be92"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Total House-Hold Income:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="267" width="142" height="20" uuid="4b82daa3-d6e9-4c55-93d9-e0fad6bbaeb8"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Live In:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="287" width="142" height="20" uuid="c6d837e5-0028-40e5-8277-c4a66b3f8562"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Benefit:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="335" width="112" height="20" uuid="4a0519f0-4e6b-4b23-9bfa-7788997465c1"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Religion:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="355" width="112" height="20" uuid="affd315a-5751-4df8-8af5-8e3df8f4fb61"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Ethnicity:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="375" width="112" height="20" uuid="8a3013c3-4162-46da-a1fb-3c359a6dfcbd"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Ethnicity Bkg.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="455" width="112" height="20" uuid="9b91eb88-e75b-4e88-8835-9b0fabe30042"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Equality:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="395" width="112" height="20" uuid="6b97d653-bee9-46be-965d-293cc0173bc6"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Sexual Orientaion:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="415" width="112" height="20" uuid="1cf73eca-8241-4b22-8e8a-30d93282dfc4"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Disability Status:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="435" width="112" height="20" uuid="e1d624d9-5349-474f-b316-fc7570b27850"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Disability Natur:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="9" width="195" height="20" uuid="e6aa5544-d5c2-44dd-b1c5-c478338ea497"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" size="11" isBold="true" isItalic="false" isUnderline="true" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Address ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="29" width="60" height="20" uuid="68ad828f-43ac-45bf-816d-4e0e78cf9ef8"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Address 1:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="49" width="60" height="20" uuid="365592c2-0506-4ba9-affe-27a644c33224"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Address 2:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="69" width="60" height="20" uuid="0419ba64-d7db-409c-82a3-4104a9d8854f"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[City:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="89" width="60" height="20" uuid="ebd6e5e1-5f96-4319-9fbe-844745a38074"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Post_Code:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="109" width="60" height="20" uuid="57a34ee6-df1a-404e-b71b-ccd42a0c7df0"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Tel.No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="129" width="60" height="20" uuid="7026a6c6-c9ee-4598-820a-6998f01deebe"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Email:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="149" width="60" height="20" uuid="c0f3f734-40e6-4ce3-adda-26216f4f827e"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Twitter:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="346" y="189" width="195" height="20" uuid="fe6e4c0e-2660-49fd-b8f0-d62755ebc5f6"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" size="11" isBold="true" isItalic="false" isUnderline="true" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Additional Information]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="346" y="209" width="91" height="20" uuid="ed83b850-b80d-4a14-beeb-b4956d49faae"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Date Registered.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="346" y="229" width="91" height="20" uuid="26b26e05-554a-4fa6-87cd-40ffc2dc541b"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Vol-Start Date:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="346" y="249" width="91" height="20" uuid="535bf80c-499e-424e-8894-9c5c29fdbcb3"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Vol-End Date:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="346" y="289" width="91" height="20" uuid="24b401b0-ee9d-40ce-817f-1e9af7462f0d"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Refered By:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="346" y="269" width="91" height="20" uuid="e2eec8d8-4aa8-4a4a-b449-5b701f0a902d"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Vol Profession:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="164" y="29" width="162" height="20" uuid="15fe8441-e30d-441d-8044-0eb068e61183"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{STUDENT_REF_NO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="164" y="49" width="162" height="20" uuid="cb467fa7-d98b-40aa-89f6-662f3c8baa1e"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SURNAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="164" y="69" width="162" height="20" uuid="52aaba84-5d11-4296-8131-3c3ba6faf855"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GIVEN_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="164" y="89" width="162" height="20" uuid="a2e454c6-4473-47bf-90ac-98d901238610"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DATE_OF_BIRTH}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="164" y="109" width="162" height="20" uuid="75603edd-7c16-44ef-99c0-407e074c61bc"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SEX}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="164" y="129" width="162" height="20" uuid="eb647e30-1078-43a5-a9a1-ac227fd0d6d7"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INSURANCE_NO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="29" width="123" height="20" uuid="60df7501-efa0-44cb-a90d-b92679bfa829"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ADDRESS_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="49" width="123" height="20" uuid="8bb2d49c-f938-4157-acfe-f0d1b0f37072"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ADDRESS_2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="69" width="123" height="20" uuid="c068f527-b6e0-4b0e-8f7c-8c47a1f3e8e6"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CITY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="89" width="123" height="20" uuid="3469dd11-acac-4f02-b3d3-0a9a4b36d323"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{POSTAL_CODE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="109" width="123" height="20" uuid="d7c8999e-beee-4424-82c4-516445c20eb7"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TEL_NO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="129" width="123" height="20" uuid="043e6312-f1e0-4c84-b691-ef15a864bc0c"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EMAIL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="149" width="123" height="20" uuid="bf5c84bd-ea5b-4036-a712-4655f7691435"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TWITTER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="227" width="146" height="20" uuid="a599e018-5a75-4b5c-b21a-643413b4e469"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EMP_STATUS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="247" width="146" height="20" uuid="c8994c08-4cfb-4592-813a-6562c45008c5"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INCOME_DESC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="267" width="146" height="20" uuid="0866fcdc-48cc-406b-b366-d690b55d7919"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LIVING_DESC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="287" width="146" height="20" uuid="cfc4cf7d-0df5-4cda-9bcf-132df3cae3ab"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BENEFIT_DESC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="335" width="300" height="20" uuid="3dc31b6d-2c79-4d09-a4d2-e544d0c69256"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RELIGION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="355" width="300" height="20" uuid="91e13300-2eb9-45c3-b310-fbbce1a882f3"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ETHN_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="375" width="300" height="20" uuid="1fd999c1-4e86-43f7-9724-47d41ea04684"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ETHN_BAK_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="415" width="300" height="20" uuid="5c818d6d-34e6-4d50-aad7-c081a6dee11c"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DISABILITY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="435" width="300" height="20" uuid="ef3adf9f-b371-4128-8802-920fe4e447ca"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DISABILITY_NATU}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="395" width="300" height="20" uuid="e1426053-b23d-4e68-8767-101d52af7de0"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ORIENTATION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="455" width="300" height="20" uuid="6a9f1a49-2385-4cfb-979c-9b3e2629d35a"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EQUALITY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="209" width="91" height="20" uuid="0c0f29d7-fd01-45d1-97b2-45efbcf7946a"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DATE_REGISTER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="229" width="91" height="20" uuid="a499665d-0336-4882-a852-d3d1bef6e5e0"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VOL_START_DATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="249" width="91" height="20" uuid="25c2c4b0-3014-4092-8ef1-17d6ae52281d"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VOL_END_DATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="269" width="91" height="20" uuid="300bf42d-67f9-461a-b589-a34203171518"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VOL_PROFESSION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="289" width="91" height="20" uuid="f2552e91-9c00-4d59-89d8-b4eb3ec73935"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{REFER_BY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="164" y="149" width="162" height="20" uuid="e4f4911a-1497-4245-94a3-3df061e26648"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BENEF_TYPE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="24" y="149" width="129" height="20" uuid="03127867-2200-4a53-b37d-e5d5219b82ad"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Beneficiary Type:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="9" width="302" height="20" uuid="2f9c8123-b274-4c79-be08-b9e5dad6771e"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="DejaVu Serif" size="11" isBold="true" isItalic="false" isUnderline="true" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ Basic Personal information ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="169" width="129" height="20" uuid="c75b916f-d386-48d3-81ed-204fe5e78ca6"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Date Of Arrival in UK:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="164" y="169" width="162" height="20" uuid="5d10251f-c3b7-4b5f-bf82-0b364083e118"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="DejaVu Serif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DATE_ARRIVEUK}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="71f87d39-fcdd-434a-915e-0083d782dde8"/>
+				<textElement textAlignment="Right">
+					<font isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="8b7a3d41-4fff-4e47-a1bd-c49bb3367e06"/>
+				<textElement>
+					<font isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="7ce1e263-32dc-4bbd-be98-19855e85cbf5"/>
+				<textElement>
+					<font isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="1" width="555" height="1" uuid="a19183b8-a879-4e8d-b04b-68cf4a37e1f9"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

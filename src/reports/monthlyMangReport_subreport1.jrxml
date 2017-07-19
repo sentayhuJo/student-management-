@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="monthlyMangReport_subreport1" language="groovy" pageWidth="572" pageHeight="752" whenNoDataType="BlankPage" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="5104b5b4-88c2-4104-8193-f7eae00447c5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="enrolmentDate1" class="java.util.Date" isForPrompting="false"/>
+	<parameter name="enrolmentDate2" class="java.util.Date" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[SELECT distinct BLF_PROJECT_TARGET.TARGET_NAME,
+      EVENTS.PRESENTED_BY,
+      SUM(EVENT_ATTENDANCE.NUMBER_ATTENDEE)
+
+FROM EVENTS INNER JOIN EVENT_ATTENDANCE ON (EVENTS.EVENT_ID=EVENT_ATTENDANCE.EVENT_ID)
+INNER JOIN BLF_PROJECT_TARGET
+ON (BLF_PROJECT_TARGET.TARGET_ID=EVENTS.TARGET_ID)
+WHERE
+     TO_CHAR(EVENTS.EVENT_START_DATE,'yy/MM/DD') BETWEEN TO_CHAR($P{enrolmentDate1},'yy/MM/DD')AND TO_CHAR($P{enrolmentDate2},'yy/MM/DD')
+GROUP BY BLF_PROJECT_TARGET.TARGET_NAME, EVENTS.PRESENTED_BY
+ORDER BY BLF_PROJECT_TARGET.TARGET_NAME]]>
+	</queryString>
+	<field name="TARGET_NAME" class="java.lang.String"/>
+	<field name="PRESENTED_BY" class="java.lang.String"/>
+	<field name="SUM(EVENT_ATTENDANCE.NUMBER_ATTENDEE)" class="java.math.BigDecimal"/>
+	<variable name="Total" class="java.lang.Integer" resetType="Group" resetGroup="TARGET_NAME" calculation="Sum">
+		<variableExpression><![CDATA[$F{SUM(EVENT_ATTENDANCE.NUMBER_ATTENDEE)}]]></variableExpression>
+	</variable>
+	<group name="TARGET_NAME">
+		<groupExpression><![CDATA[$F{TARGET_NAME}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement x="0" y="0" width="553" height="20" forecolor="#006699" uuid="17f124cc-a0cc-4821-b46f-ffc8ad17698e"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif" size="11" isBold="true" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TARGET_NAME}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<textField>
+					<reportElement x="463" y="0" width="90" height="20" forecolor="#006699" backcolor="#006699" uuid="62792458-71eb-43b6-8250-1c29c5c9d5cb"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="DejaVu Serif" size="11" isBold="true" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{Total}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="363" y="0" width="100" height="20" uuid="1c2ea0fa-2af0-40fc-afc0-2b434a1aa46c"/>
+					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="DejaVu Serif" size="11" isBold="true" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[Total:]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="PRESENTED_BY">
+		<groupExpression><![CDATA[$F{PRESENTED_BY}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="463" y="0" width="90" height="20" forecolor="#006699" backcolor="#006699" uuid="130d341a-f0fa-4acf-b256-24cd6d5f7f4a"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="11" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SUM(EVENT_ATTENDANCE.NUMBER_ATTENDEE)}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="216" y="0" width="247" height="20" forecolor="#006699" uuid="7a0f02c5-d894-459d-b4c5-b9434e024de1"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PRESENTED_BY}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
